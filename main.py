@@ -10,7 +10,8 @@ yellow = (0,0,255)
 # Loading the cascade
 Person_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_fullbody.xml")
 Face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalFace_default.xml")
-Cars_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_car.xml")
+Upper_Body_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_upperbody.xml")
+Lower_Body_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_lowerbody.xml")
 
 
 
@@ -29,7 +30,8 @@ while True:
     # Detect the Faces and boundaries and variables
     Person = Person_cascade.detectMultiScale(gray, 1.1, 4)
     Face = Face_cascade.detectMultiScale(gray, 1.1, 4)
-    Car = Cars_cascade.detectMultiScale(gray, 1.1, 4)
+    Upper_Body = Upper_Body_cascade.detectMultiScale(gray, 1.1, 4)
+    Lower_Body = Lower_Body_cascade.detectMultiScale(gray,1.1,4)
 
 
     # Draw the rectangle around each Object
@@ -46,11 +48,19 @@ while True:
         cv2.putText(img, "Face", (x, y - 5),
                     cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, blue,0)
 
-    #Car
-    for (x, y, w, h) in Car:
+    #Upper Body
+    for (x, y, w, h) in Upper_Body:
         cv2.rectangle(img, (x, y), (x + w, y + h), (yellow), 1)
-        cv2.putText(img, "Car", (x, y - 5),
+        cv2.putText(img, "Upper_Body", (x, y - 5),
                     cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, yellow,0)
+
+    #lower Body
+    for (x, y, w, h) in Lower_Body:
+        cv2.rectangle(img, (x, y), (x + w, y + h), (yellow), 1)
+        cv2.putText(img, "Lower_Body", (x, y - 5),
+                    cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, yellow,0)
+
+
 
 
 
